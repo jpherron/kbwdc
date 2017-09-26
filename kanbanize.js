@@ -44,7 +44,7 @@
     };
 
         myConnector.getData = function (table, doneCallback) {
-
+          tableau.log("getData"); 
         };
 
         tableau.registerConnector(myConnector);
