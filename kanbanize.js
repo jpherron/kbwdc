@@ -44,7 +44,7 @@
     myConnector.getData = function() {
     tableau.log("starting");
     alert("starting");
-    console.log("starting");  
+    console.log("starting");
     $.ajax({
     headers : {
     'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
@@ -58,6 +58,9 @@
     });
     };
 
+    tableau.log("starting2");
+    alert("starting2");
+    console.log("starting2");
     tableau.registerConnector(myConnector);
 
     $(document).ready(function(){
