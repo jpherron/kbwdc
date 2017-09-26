@@ -55,7 +55,7 @@ tableau.registerConnector(myConnector);
             url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
             dataType: 'json',
             success: function(results) {
-                console.log(results);
+                tableau.log(results);
                 }
             });
             tableau.connectionName = "Kanbanize Data";
