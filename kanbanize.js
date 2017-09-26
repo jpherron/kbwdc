@@ -43,21 +43,18 @@ myConnector.getSchema = function (schemaCallback) {
 
 myConnector.getData = function(table, doneCallback) {
   $.ajax({
-    headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA'},
-    crossDomain: 'true',
-    type: 'POST',
+    headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
+    method: 'POST',
     url: 'https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json',
-    dataType: 'jsonp'
+    dataType: 'jsonp',
     success: function(res) {
         console.log(res);
         }
-
-        table.appendRows(tableData);
-        doneCallback();
     });
-};
+doneCallback();
+}
 
-    tableau.registerConnector(myConnector);
+tableau.registerConnector(myConnector);
 
     $(document).ready(function () {
         $("#submitButton").click(function () {
