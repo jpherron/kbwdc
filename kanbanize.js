@@ -42,6 +42,9 @@
     };
 
     myConnector.getData = function() {
+    tableau.log("starting");
+    alert("starting");
+    console.log("starting");  
     $.ajax({
     headers : {
     'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
