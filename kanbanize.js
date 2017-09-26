@@ -41,7 +41,7 @@ myConnector.getSchema = function (schemaCallback) {
     schemaCallback([tableInfo]);
 };
 
-myConnector.getData = function(doneCallback) {
+myConnector.getData = function() {
   $.ajax({
     headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
     method: 'POST',
@@ -51,7 +51,6 @@ myConnector.getData = function(doneCallback) {
         console.log(res);
         }
     });
-doneCallback();
 }
 
 tableau.registerConnector(myConnector);
