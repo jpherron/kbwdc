@@ -56,7 +56,8 @@ tableau.registerConnector(myConnector);
             dataType: 'json',
             success: function(results) {
                 tableau.log(results);
-                }
+              },
+              error: function() {alert("error")};
             });
             tableau.connectionName = "Kanbanize Data";
             tableau.submit();
