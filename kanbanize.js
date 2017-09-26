@@ -53,8 +53,8 @@ tableau.registerConnector(myConnector);
             type: "POST",
             url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
             dataType: 'json',
-            success: function(results) {
-                tableau.log(results);
+            success: function(result) {
+                tableau.log(result);
               },
               error: function() {tableau.log("error")};
             });
