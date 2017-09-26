@@ -41,9 +41,22 @@ myConnector.getSchema = function (schemaCallback) {
     schemaCallback([tableInfo]);
 };
 
-    myConnector.getData = function (table, doneCallback) {
+myConnector.getData = function(table, doneCallback) {
+    $.getJSON("https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/format/json", function(resp) {
+        var feat = resp.features,
+            tableData = [];
 
-    };
+        // Iterate over the JSON object
+        for (var i = 0, len = feat.length; i < len; i++) {
+            tableData.push({
+                "id": feat[i].id
+            });
+        }
+
+        table.appendRows(tableData);
+        doneCallback();
+    });
+};
 
     tableau.registerConnector(myConnector);
 
