@@ -41,7 +41,7 @@ myConnector.getSchema = function (schemaCallback) {
     schemaCallback([tableInfo]);
 };
 
-myConnector.getData = function(table, doneCallback) {
+myConnector.getData = function(doneCallback) {
   $.ajax({
     headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
     method: 'POST',
