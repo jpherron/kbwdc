@@ -42,7 +42,6 @@ myConnector.getSchema = function (schemaCallback) {
 };
 
 myConnector.getData = function() {
-
 };
 
 tableau.registerConnector(myConnector);
@@ -57,7 +56,7 @@ tableau.registerConnector(myConnector);
             success: function(results) {
                 tableau.log(results);
               },
-              error: function() {alert("error")};
+              error: function() {tableau.log("error")};
             });
             tableau.connectionName = "Kanbanize Data";
             tableau.submit();
