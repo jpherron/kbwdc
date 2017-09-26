@@ -44,9 +44,9 @@ myConnector.getSchema = function (schemaCallback) {
 myConnector.getData = function() {
   $.ajax({
     headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
-    method: 'POST',
+    method: "POST",
     url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
-    dataType: 'jsonp',
+    dataType: 'json',
     success: function(results) {
         console.log(results);
         }
