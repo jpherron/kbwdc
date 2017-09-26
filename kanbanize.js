@@ -50,8 +50,8 @@
     type: "POST",
     url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
     dataType: 'json',
-    success: function(result) { console.log(result); },
-    error: function() { console.log("error"); }
+    success: function(result) { tableau.log(result); },
+    error: function() { tableau.log("error"); }
     });
     };
 
