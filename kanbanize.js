@@ -43,7 +43,7 @@ myConnector.getSchema = function (schemaCallback) {
 
 myConnector.getData = function() {
 
-}
+};
 
 tableau.registerConnector(myConnector);
 
