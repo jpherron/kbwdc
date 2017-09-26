@@ -44,19 +44,12 @@ myConnector.getSchema = function (schemaCallback) {
 myConnector.getData = function(table, doneCallback) {
   $.ajax({
     headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA'},
-    crossDomain: "true",
-    type: "POST",
-    url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
-    dataType: "json"
-    success: function(resp) {
-        var feat = resp.features,
-            tableData = [];
-
-        // Iterate over the JSON object
-        for (var i = 0, len = resp.length; i < len; i++) {
-            tableData.push({
-                "taskid": resp[i].taskid
-            });
+    crossDomain: 'true',
+    type: 'POST',
+    url: 'https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json',
+    dataType: 'jsonp'
+    success: function(res) {
+        console.log(res);
         }
 
         table.appendRows(tableData);
