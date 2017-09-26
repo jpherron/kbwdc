@@ -45,9 +45,9 @@ myConnector.getData = function(doneCallback) {
   $.ajax({
     headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
     method: 'POST',
-    url: 'https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json',
+    url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
     dataType: 'jsonp',
-    success: function(res) {
+    .done: function(res) {
         console.log(res);
         }
     });
