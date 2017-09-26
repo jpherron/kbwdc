@@ -53,23 +53,25 @@
     };
 
     myConnector.getData = function() {
+      $.ajax({
+      headers : {
+        'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
+        'Access-Control-Allow-Origin': '*'
+      },
+      type: "POST",
+      url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+      dataType: 'json',
+      success: function(result) { console.log(result); },
+      error: function() { console.log("error"); }
+      });
     };
 
     tableau.registerConnector(myConnector);
 
     $(document).ready(function(){
-      $("button").click(function () {
-        $.ajax({
-        headers : {
-          'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
-          'Access-Control-Allow-Origin': '*'
-        },
-        type: "POST",
-        url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
-        dataType: 'json',
-        success: function(result) { console.log(result); },
-        error: function() { console.log("error"); }
-        });
+      $("#submitButton").click(function () {
+        tableau.connectionName = "Kanbanize Data"; // This will be the data source name in Tableau
+        tableau.submit(); // This sends the connector object to Tableau
       });
     });
     </script>
@@ -80,7 +82,7 @@
     <div class="container container-table">
         <div class="row vertical-center-row">
             <div class="text-center col-md-4 col-md-offset-4">
-                <button class="btn btn-success" style="margin: 10px;">Get Kanbanize Data</button>
+                <button id="submitButton" class="btn btn-success" style="margin: 10px;">Get Kanbanize Data</button>
             </div>
         </div>
     </div>
