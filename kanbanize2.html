@@ -10,16 +10,18 @@
 
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.2.latest.js" type="text/javascript"></script>
     <script>
-    $("#submitButton").click(function () {
-      $.ajax({
-      headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
-      type: "POST",
-      url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
-      dataType: 'json',
-      success: function(result) {
-          console.log(result);
-        },
-        error: function() {console.log("error")};
+    $(document).ready(function(){
+      $("submitButton").click(function () {
+        $.ajax({
+        headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
+        type: "POST",
+        url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+        dataType: 'json',
+        success: function(result) {
+            console.log(result);
+          },
+          error: function() {console.log("error")};
+        });
       });
     });
     </script>
