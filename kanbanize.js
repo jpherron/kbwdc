@@ -1,7 +1,7 @@
 (function () {
     var myConnector = tableau.makeConnector();
 
-myConnector.getSchema = function (schemaCallback) {
+    myConnector.getSchema = function (schemaCallback) {
     var cols = [
         { id : "taskid", alias : "Card ID", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
         { id : "position", alias : "Position", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
@@ -39,27 +39,28 @@ myConnector.getSchema = function (schemaCallback) {
     };
 
     schemaCallback([tableInfo]);
-};
+    };
 
-myConnector.getData = function() {
-};
-
-tableau.registerConnector(myConnector);
-
-    $(document).ready(function () {
-        $("#submitButton").click(function () {
-          $.ajax({
-            headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
-            type: "POST",
-            url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
-            dataType: 'json',
-            success: function(result) {
-                tableau.log(result);
-              },
-              error: function() {tableau.log("error")};
-            });
-            tableau.connectionName = "Kanbanize Data";
-            tableau.submit();
-        });
+    myConnector.getData = function() {
+    $.ajax({
+    headers : {
+    'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
+    'Access-Control-Allow-Origin': '*'
+    },
+    type: "POST",
+    url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+    dataType: 'json',
+    success: function(result) { console.log(result); },
+    error: function() { console.log("error"); }
     });
-})();
+    };
+
+    tableau.registerConnector(myConnector);
+
+    $(document).ready(function(){
+    $("#submitButton").click(function () {
+    tableau.connectionName = "Kanbanize Data"; // This will be the data source name in Tableau
+    tableau.submit(); // This sends the connector object to Tableau
+    });
+    });
+});
