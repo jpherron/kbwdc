@@ -47,7 +47,7 @@ myConnector.getData = function(table, doneCallback) {
     'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA'
   }
 });
-  $.getJSON("https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/format/json", function(resp) {
+  $.post("https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/format/json", function(resp) {
         var feat = resp.features,
             tableData = [];
 
