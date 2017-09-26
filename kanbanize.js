@@ -47,7 +47,7 @@ myConnector.getData = function(table, doneCallback) {
     'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA'
   }
 });
-  $.post("https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_task_details/boardid/2/taskid/154/format/json", function(resp) {
+  $.post("https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_task_details/boardid/2/taskid/154/format/json", function(resp) {
         var feat = resp.features,
             tableData = [];
 
@@ -57,7 +57,6 @@ myConnector.getData = function(table, doneCallback) {
                 "taskid": resp[i].taskid
             });
         }
-
         table.appendRows(tableData);
         doneCallback();
     });
