@@ -54,7 +54,7 @@ myConnector.getData = function(table, doneCallback) {
         // Iterate over the JSON object
         for (var i = 0, len = resp.length; i < len; i++) {
             tableData.push({
-                "taskid": feat[i].taskid
+                "taskid": resp[i].taskid
             });
         }
 
