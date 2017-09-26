@@ -38,6 +38,8 @@
         columns : cols
     };
 
+    tableau.log("schema");
+
     schemaCallback([tableInfo]);
     };
 
@@ -47,7 +49,7 @@
 
         tableau.registerConnector(myConnector);
     })();
-    
+
     $(document).ready(function () {
     $("#submitButton").click(function () {
         tableau.connectionName = "Kanbanize Data";
