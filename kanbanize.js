@@ -47,8 +47,8 @@ myConnector.getData = function() {
     method: 'POST',
     url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
     dataType: 'jsonp',
-    .done: function(res) {
-        console.log(res);
+    success: function(results) {
+        console.log(results);
         }
     });
 }
@@ -57,6 +57,15 @@ tableau.registerConnector(myConnector);
 
     $(document).ready(function () {
         $("#submitButton").click(function () {
+          $.ajax({
+            headers : { 'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA' },
+            method: 'POST',
+            url: "https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+            dataType: 'jsonp',
+            success: function(results) {
+                console.log(results);
+                }
+            });
             tableau.connectionName = "Kanbanize Data";
             tableau.submit();
         });
