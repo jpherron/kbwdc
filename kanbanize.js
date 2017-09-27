@@ -19,7 +19,7 @@
         { id : "priority", alias : "Priority", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "size", alias : "Size", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "deadline", alias : "Deadline dd-mm", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
-        { id : "deadlineoriginalformat", alias : "Deadline yyyy-mm-dd", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
+        { id : "deadlineoriginalformat", alias : "Deadline yyyy-mm-dd", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.date },
         { id : "extlink", alias : "External Link", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "tags", alias : "Tags", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "columnid", alias : "Column ID", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
@@ -34,7 +34,15 @@
         { id : "columnpath", alias : "Column Path", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "logedtime", alias : "Logged Time", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "attachments", alias : "Attachments", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
-        { id : "title", alias : "Title",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string }
+        { id : "title", alias : "Title",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
+        { id : "createdat", alias : "Datetime Created",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "title", alias : "Title",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
+        { id : "requester", alias : "requester",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
+        { id : "charterurl", alias : "Charter URL",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string }
+
+
+
+
     ];
 
     var tableInfo = {
@@ -54,7 +62,7 @@
               'Access-Control-Allow-Origin': '*'
             },
             type: "POST",
-            url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/format/json", //CORS hack required to get around WDC CORS issue
+            url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/subtasks/yes/comments/yes/format/json", //CORS hack required to get around WDC CORS issue
             dataType: 'json',
             success: function(result) {
               var tab = result, tableData = [];
@@ -88,8 +96,13 @@
                     "columnpath": tab[i].columnpath,
                     "logedtime": tab[i].logedtime,
                     "attachments": tab[i].attachments,
-                    "title": tab[i].title
                     });
+
+                    for (var j = 0, len2 = tab[i].customfields.length; j < len2; j++) {
+                      if (tab[i].customfields[j].fieldid =="10") { tableData.push({"requester": tab[i].customfields[j].value}); }
+                      if (tab[i].customfields[j].fieldid =="5") { tableData.push({"charterurl": tab[i].customfields[j].value}); }
+                    }
+
                   };
               tableau.log("total items processed: "+i);
               table.appendRows(tableData);
