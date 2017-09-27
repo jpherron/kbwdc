@@ -88,10 +88,8 @@
                   });
                 };
               table.appendRows(tableData);
-            },
-            error: function() { tableau.log("error"); }
+            }
           });
-
           doneCallback();
         };
 
