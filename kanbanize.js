@@ -8,6 +8,7 @@
 
     myConnector.getSchema = function (schemaCallback) {
     var cols = [
+        { id : "rowdate", alias : "Record Timestamp", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
         { id : "taskid", alias : "Card ID", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
         { id : "position", alias : "Position", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "type", alias : "Type", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
@@ -22,7 +23,7 @@
         { id : "deadlineoriginalformat", alias : "Deadline yyyy-mm-dd", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.date },
         { id : "extlink", alias : "External Link", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "tags", alias : "Tags", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
-        { id : "columnid", alias : "Column ID", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
+        { id : "columnid", alias : "Column ID", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "laneid", alias : "Lane ID", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "leadtime", alias : "Leadtime", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "blocked", alias : "Blocked", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.bool },
@@ -71,12 +72,14 @@
               for (var i = 0, len = tab.length; i < len; i++) {
                 var rqstr = "";
                 var chrtr = "";
+                var curdate = Math.floor(Date.now() / 1000);
 
                 for (var j = 0, len2 = tab[i].customfields.length; j < len2; j++) {
                   if (tab[i].customfields[j].fieldid =="10"){ rqstr = tab[i].customfields[j].value; }
                   if (tab[i].customfields[j].fieldid =="5") { chrtr = tab[i].customfields[j].value; }
                 }
                   tableData.push({
+                    "rowdate": curdate,
                     "taskid": tab[i].taskid,
                     "position": tab[i].position,
                     "type": tab[i].type,
