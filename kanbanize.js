@@ -44,7 +44,57 @@
     };
 
         myConnector.getData = function (table, doneCallback) {
-          tableau.log("getData"); 
+          tableau.log("getDataStart");
+          $.ajax({
+            headers : {
+              'apikey' : 'EqnM1qQSfWpY7R8RJ76Ufd87ilW5dGReMHnAW1mA',
+              'Access-Control-Allow-Origin': '*'
+            },
+            type: "POST",
+            url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+            dataType: 'json',
+            success: function(result) {
+              tableau.log(result);
+              var tab = result, tableData = [];
+
+                      // Iterate over the JSON object
+              for (var i = 0, len = tab.length; i < len; i++) {
+                  tableData.push({
+                    "taskid": tab[i].taskid,
+                    "position": tab[i].position,
+                    "type": tab[i].type,
+                    "assignee": tab[i].assignee,
+                    "description": tab[i].description,
+                    "subtasks": tab[i].subtasks,
+                    "subtaskscomplete": tab[i].subtaskscomplete,
+                    "color": tab[i].color,
+                    "priority": tab[i].priority,
+                    "size": tab[i].size,
+                    "deadline": tab[i].deadline,
+                    "deadlineoriginalformat": tab[i].deadlineoriginalformat,
+                    "extlink": tab[i].extlink,
+                    "tags": tab[i].tags,
+                    "columnid": tab[i].columnid,
+                    "laneid": tab[i].laneid,
+                    "leadtime": tab[i].leadtime,
+                    "blocked": tab[i].blocked,
+                    "blockedreason": tab[i].blockedreason,
+                    "subtaskdetails": tab[i].subtaskdetails,
+                    "comments": tab[i].comments,
+                    "columnname": tab[i].columnname,
+                    "lanename": tab[i].lanename,
+                    "columnpath": tab[i].columnpath,
+                    "logedtime": tab[i].logedtime,
+                    "attachments": tab[i].attachments,
+                    "title": tab[i].title
+                  });
+                };
+              table.appendRows(tableData);
+            },
+            error: function() { tableau.log("error"); }
+          });
+          tableau.log("getDataEnd");
+          doneCallback();
         };
 
         tableau.registerConnector(myConnector);
