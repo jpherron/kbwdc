@@ -8,7 +8,7 @@
 
     myConnector.getSchema = function (schemaCallback) {
     var cols = [
-        { id : "rowdate", alias : "Record Timestamp", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
+        { id : "rowdate", alias : "Record Timestamp", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "taskid", alias : "Card ID", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
         { id : "position", alias : "Position", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "type", alias : "Type", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
