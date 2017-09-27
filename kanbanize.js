@@ -1,6 +1,11 @@
 (function () {
     var myConnector = tableau.makeConnector();
 
+    myConnector.init = function(initCallback) {
+        initCallback();
+        tableau.submit();
+    };
+
     myConnector.getSchema = function (schemaCallback) {
     var cols = [
         { id : "taskid", alias : "Card ID", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
@@ -49,17 +54,16 @@
               'Access-Control-Allow-Origin': '*'
             },
             type: "POST",
-            url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
+            url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2/format/json", //CORS hack required to get around WDC CORS issue
             dataType: 'json',
             success: function(result) {
-              tableau.log("getDataStart");
               var tab = result, tableData = [];
 
-                      // Iterate over the JSON object
+              // Iterate over the JSON object
               for (var i = 0, len = tab.length; i < len; i++) {
                   tableData.push({
                     "taskid": tab[i].taskid,
-                    "position": tab[i].position/*,
+                    "position": tab[i].position,
                     "type": tab[i].type,
                     "assignee": tab[i].assignee,
                     "description": tab[i].description,
@@ -84,21 +88,23 @@
                     "columnpath": tab[i].columnpath,
                     "logedtime": tab[i].logedtime,
                     "attachments": tab[i].attachments,
-                    "title": tab[i].title*/
-                  });
-                };
+                    "title": tab[i].title
+                    });
+                  };
+              tableau.log("total items processed: "+i);
               table.appendRows(tableData);
+              doneCallback();
             }
           });
-          doneCallback();
-        };
+        }; //getData
+
 
         tableau.registerConnector(myConnector);
     })();
-
+/* not needed, if not interactive
     $(document).ready(function () {
     $("#submitButton").click(function () {
         tableau.connectionName = "All Kanbanize Data";
         tableau.submit();
     });
-});
+});*/
