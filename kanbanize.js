@@ -69,6 +69,13 @@
 
               // Iterate over the JSON object
               for (var i = 0, len = tab.length; i < len; i++) {
+                var rqstr = "";
+                var chrtr = "";
+
+                for (var j = 0, len2 = tab[i].customfields.length; j < len2; j++) {
+                  if (tab[i].customfields[j].fieldid =="10"){ rqstr = tab[i].customfields[j].value; }
+                  if (tab[i].customfields[j].fieldid =="5") { chrtr = tab[i].customfields[j].value; }
+                }
                   tableData.push({
                     "taskid": tab[i].taskid,
                     "position": tab[i].position,
@@ -96,19 +103,16 @@
                     "columnpath": tab[i].columnpath,
                     "logedtime": tab[i].logedtime,
                     "attachments": tab[i].attachments,
+                    "requester": rqstr,
+                    "charterurl": chrtr
                     });
-
-                    for (var j = 0, len2 = tab[i].customfields.length; j < len2; j++) {
-                      if (tab[i].customfields[j].fieldid =="10") { tableData.push({"requester": tab[i].customfields[j].value}); }
-                      if (tab[i].customfields[j].fieldid =="5") { tableData.push({"charterurl": tab[i].customfields[j].value}); }
-                    }
-
-                  };
+                  }
               tableau.log("total items processed: "+i);
               table.appendRows(tableData);
               doneCallback();
-            }
-          });
+
+          } //success
+        }); //ajax
         }; //getData
 
 
