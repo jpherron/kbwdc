@@ -59,7 +59,7 @@
               for (var i = 0, len = tab.length; i < len; i++) {
                   tableData.push({
                     "taskid": tab[i].taskid,
-                    "position": tab[i].position,
+                    "position": tab[i].position/*,
                     "type": tab[i].type,
                     "assignee": tab[i].assignee,
                     "description": tab[i].description,
@@ -84,7 +84,7 @@
                     "columnpath": tab[i].columnpath,
                     "logedtime": tab[i].logedtime,
                     "attachments": tab[i].attachments,
-                    "title": tab[i].title
+                    "title": tab[i].title*/
                   });
                 };
               table.appendRows(tableData);
