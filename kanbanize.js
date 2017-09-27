@@ -112,6 +112,7 @@
                     "columnpath": tab[i].columnpath,
                     "logedtime": tab[i].logedtime,
                     "attachments": tab[i].attachments,
+                    "title": tab[i].title,
                     "requester": rqstr,
                     "charterurl": chrtr
                     });
