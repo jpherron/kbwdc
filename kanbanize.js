@@ -49,7 +49,8 @@
     var tableInfo = {
         id : "KanbanizeData",
         alias : "Kanbanize Data",
-        columns : cols
+        columns : cols,
+        incrementColumnId : "rowdate"
     };
 
     schemaCallback([tableInfo]);
