@@ -34,7 +34,7 @@
 
     var tableInfo = {
         id : "KanbanizeData",
-        alias : "All Kanbanize Data",
+        alias : "Kanbanize Data",
         columns : cols
     };
 
@@ -52,7 +52,7 @@
             url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
             dataType: 'json',
             success: function(result) {
-
+              tableau.log("getDataStart")
               var tab = result, tableData = [];
 
                       // Iterate over the JSON object
@@ -98,7 +98,7 @@
 
     $(document).ready(function () {
     $("#submitButton").click(function () {
-        tableau.connectionName = "Kanbanize Data";
+        tableau.connectionName = "All Kanbanize Data";
         tableau.submit();
     });
 });
