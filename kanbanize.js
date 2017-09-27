@@ -8,7 +8,7 @@
 
     myConnector.getSchema = function (schemaCallback) {
     var cols = [
-        { id : "rowdate", alias : "Record Timestamp", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
+        { id : "rowdate", alias : "Record Timestamp", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "taskid", alias : "Card ID", columnType: "discrete", dataType : tableau.dataTypeEnum.float },
         { id : "position", alias : "Position", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         { id : "type", alias : "Type", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
@@ -73,8 +73,13 @@
               for (var i = 0, len = tab.length; i < len; i++) {
                 var rqstr = "";
                 var chrtr = "";
-                var curdate = Math.floor(Date.now() / 1000);
-
+                var curepochdate = new Date();
+                var curdate =
+                  (curepochdate.getMonth() + 1) + "/" +
+                  curepochdate.getDate() + "/" +
+                  curepochdate.getFullYear() + " " +
+                  curepochdate.getHours() + ":00:00";
+                  
                 for (var j = 0, len2 = tab[i].customfields.length; j < len2; j++) {
                   if (tab[i].customfields[j].fieldid =="10"){ rqstr = tab[i].customfields[j].value; }
                   if (tab[i].customfields[j].fieldid =="5") { chrtr = tab[i].customfields[j].value; }
