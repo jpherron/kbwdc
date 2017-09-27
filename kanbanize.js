@@ -52,7 +52,7 @@
             url: "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/2//format/json",
             dataType: 'json',
             success: function(result) {
-              tableau.log("getDataStart")
+              tableau.log("getDataStart");
               var tab = result, tableData = [];
 
                       // Iterate over the JSON object
