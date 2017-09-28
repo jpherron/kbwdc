@@ -65,7 +65,8 @@
   "dependencies": {
     "corsproxy": "^1.4.0",
     "http-server": "^0.9.0",
-    "npm-run-all": "^2.1.1"
+    "npm-run-all": "^2.1.1",
+    "xlsjs": "^1.0.0"
   },
   "nyc": {
     "include": [

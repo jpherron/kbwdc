@@ -68,7 +68,7 @@
             dataType: 'json',
             success: function(result) {
               var tab = result, tableData = [];
-
+console.log(tab);
               // Iterate over the JSON object
               for (var i = 0, len = tab.length; i < len; i++) {
                 var rqstr = "";
