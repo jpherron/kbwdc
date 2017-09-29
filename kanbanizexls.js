@@ -42,6 +42,22 @@
         { id : "timesmovedtoblocked", alias : "Times Moved to Blocked",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "cycletime", alias : "Cycle Time (seconds)",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "modifieddate", alias : "Last Modified Date",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdatearchive", alias : "First Date Moved to Archive",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatearchive", alias : "Last Date Moved to Archive",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdateactive", alias : "First Date Moved to Active",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdateactive", alias : "Last Date Moved to Active",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdatedocumentwrapup", alias : "First Date Moved to Document/Wrap-up",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatedocumentwrapup", alias : "Last Date Moved to Document/Wrap-up",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdatebacklog", alias : "First Date Moved to Backlog",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatebacklog", alias : "LLast Date Moved to Backlog",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdatekilled", alias : "First Date Moved to Killed",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatekilled", alias : "Last Date Moved to Killed",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdateready", alias : "First Date Moved to Ready Stack",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdateready", alias : "Last Date Moved to Ready Stack",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdateblocked", alias : "First Date Moved to Blocked",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdateblocked", alias : "Last Date Moved to Blocked",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "firstdatereadyforreview", alias : "First Date Moved to Ready for Review",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatereadyforreview", alias : "Last Date Moved to Ready for Review",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "section", alias : "Section",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string }
         //{ id : "requester", alias : "requester",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string },
         //{ id : "charterurl", alias : "Charter URL",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.string }
@@ -61,6 +77,7 @@
 
               /* set up XMLHttpRequest */
               var url = "https://cors-anywhere.herokuapp.com/https://globalnoc.kanbanize.com/publicfilters/export?key=3f0748cfd8c46ecff152c2cd0ecd2f1c";
+
               var oReq = new XMLHttpRequest();
 
               oReq.open("GET", url, true);
@@ -90,6 +107,7 @@
 
                 for (var i = 0, len = wb.length; i < len; i++) {
 
+                  //create a timestamp of current date, current hour.
                    var curepochdate = new Date();
                    var curdate =
                      (curepochdate.getMonth() + 1) + "/" +
@@ -97,7 +115,6 @@
                      curepochdate.getFullYear() + " " +
                      curepochdate.getHours() + ":00:00";
 
-                     console.log(wb[i].Title);
                      tableData.push({
                        "rowdate": curdate,
                        "taskid": wb[i][ 'Card ID' ],
@@ -127,27 +144,35 @@
                        "cycletime": wb[i]['Cycle Time (seconds)'],
                        "modifieddate": wb[i]['Last Modified'],
                        "requester": wb[i]['Requester / Taskboard'],
-                       "timesmovedtoactive": wb[i]['Times Moved To Active'],
-                       "timesmovedtoarchive": wb[i]['Times Moved To Archive'],
-                       "timesmovedtoblocked": wb[i]['Times Moved To Blocked'],
+                       "firstdatearchive": wb[i]['First Date Moved to Archive'],
+                       "lastdatearchive": wb[i]['Last Date Moved to Archive'],
+                       "firstdateactive": wb[i]['First Date Moved to Active'],
+                       "lastdateactive": wb[i]['Last Date Moved to Active'],
+                       "firstdatedocumentwrapup": wb[i]['First Date Moved to Document/ Wrap-up'],
+                       "lastdatedocumentwrapup": wb[i]['Last Date Moved to Document/ Wrap-up'],
+                       "firstdatebacklog": wb[i]['First Date Moved to Backlog'],
+                       "lastdatebacklog": wb[i]['Last Date Moved to Backlog'],
+                       "firstdatekilled": wb[i]['First Date Moved to Killed'],
+                       "lastdatekilled": wb[i]['Last Date Moved to Killed'],
+                       "firstdateready": wb[i]['First Date Moved to Ready Stack'],
+                       "lastdateready": wb[i]['Last Date Moved to Ready Stack'],
+                       "firstdateblocked": wb[i]['First Date Moved to Blocked'],
+                       "lastdateblocked": wb[i]['Last Date Moved to Blocked'],
+                       "firstdatereadyforreview": wb[i]['First Date Moved to Ready for Review'],
+                       "lastdatereadyforreview": wb[i]['Last Date Moved to Ready for Review'],
                        "section": wb[i].Section
                        });
                      }
                  tableau.log("total items processed: "+i);
                  table.appendRows(tableData);
+                 doneCallback();
               }
 
               oReq.send();
-              //doneCallback;
 
-              // Iterate over the JSON object
+              //doneCallback();
 
-              doneCallback();
-
-          }; //success
-      //  }); //ajax*/
-    //  }; //getData
-
+          }; //getData
 
         tableau.registerConnector(myConnector);
     })();
