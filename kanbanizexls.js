@@ -41,15 +41,15 @@
         { id : "timesmovedtoarchive", alias : "Times Moved to Archive",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "timesmovedtoblocked", alias : "Times Moved to Blocked",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
         { id : "cycletime", alias : "Cycle Time (seconds)",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.int },
+        { id : "firstdatearchive", alias : "First Date Moved to Archive", columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "modifieddate", alias : "Last Modified Date",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
-        { id : "firstdatearchive", alias : "First Date Moved to Archive",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "lastdatearchive", alias : "Last Date Moved to Archive",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "firstdateactive", alias : "First Date Moved to Active",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "lastdateactive", alias : "Last Date Moved to Active",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "firstdatedocumentwrapup", alias : "First Date Moved to Document/Wrap-up",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "lastdatedocumentwrapup", alias : "Last Date Moved to Document/Wrap-up",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "firstdatebacklog", alias : "First Date Moved to Backlog",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
-        { id : "lastdatebacklog", alias : "LLast Date Moved to Backlog",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
+        { id : "lastdatebacklog", alias : "Last Date Moved to Backlog",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "firstdatekilled", alias : "First Date Moved to Killed",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "lastdatekilled", alias : "Last Date Moved to Killed",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
         { id : "firstdateready", alias : "First Date Moved to Ready Stack",columnRole: "dimension", columnType: "discrete", dataType : tableau.dataTypeEnum.datetime },
@@ -106,7 +106,9 @@
               //  wb = ["erwer", "ere","ddd"]
 
                 for (var i = 0, len = wb.length; i < len; i++) {
-
+console.log(wb[i]['First Date Moved To Active']);
+      //  for (var key in wb[i]) {console.log(key);}
+                  //tableau.log("First Date Moved to Archive: " + wb[i]['First Date Moved to Archive']);
                   //create a timestamp of current date, current hour.
                    var curepochdate = new Date();
                    var curdate =
@@ -146,23 +148,24 @@
                        "requester": wb[i]['Requester / Taskboard'],
                        "firstdatearchive": wb[i]['First Date Moved to Archive'],
                        "lastdatearchive": wb[i]['Last Date Moved to Archive'],
-                       "firstdateactive": wb[i]['First Date Moved to Active'],
-                       "lastdateactive": wb[i]['Last Date Moved to Active'],
-                       "firstdatedocumentwrapup": wb[i]['First Date Moved to Document/ Wrap-up'],
-                       "lastdatedocumentwrapup": wb[i]['Last Date Moved to Document/ Wrap-up'],
-                       "firstdatebacklog": wb[i]['First Date Moved to Backlog'],
-                       "lastdatebacklog": wb[i]['Last Date Moved to Backlog'],
-                       "firstdatekilled": wb[i]['First Date Moved to Killed'],
-                       "lastdatekilled": wb[i]['Last Date Moved to Killed'],
-                       "firstdateready": wb[i]['First Date Moved to Ready Stack'],
-                       "lastdateready": wb[i]['Last Date Moved to Ready Stack'],
-                       "firstdateblocked": wb[i]['First Date Moved to Blocked'],
-                       "lastdateblocked": wb[i]['Last Date Moved to Blocked'],
-                       "firstdatereadyforreview": wb[i]['First Date Moved to Ready for Review'],
-                       "lastdatereadyforreview": wb[i]['Last Date Moved to Ready for Review'],
+                       "firstdateactive": wb[i]['First Date Moved To Active'],
+                       "lastdateactive": wb[i]['Last Date Moved To Active'],
+                       "firstdatedocumentwrapup": wb[i]['First Date Moved To Document/ Wrap-up'],
+                       "lastdatedocumentwrapup": wb[i]['Last Date Moved To Document/ Wrap-up'],
+                       "firstdatebacklog": wb[i]['First Date Moved To Backlog'],
+                       "lastdatebacklog": wb[i]['Last Date Moved To Backlog'],
+                       "firstdatekilled": wb[i]['First Date Moved To Killed'],
+                       "lastdatekilled": wb[i]['Last Date Moved To Killed'],
+                       "firstdateready": wb[i]['First Date Moved To Ready Stack'],
+                       "lastdateready": wb[i]['Last Date Moved To Ready Stack'],
+                       "firstdateblocked": wb[i]['First Date Moved To Blocked'],
+                       "lastdateblocked": wb[i]['Last Date Moved To Blocked'],
+                       "firstdatereadyforreview": wb[i]['First Date Moved To Ready For Review'],
+                       "lastdatereadyforreview": wb[i]['Last Date Moved To Ready For Review'],
                        "section": wb[i].Section
                        });
                      }
+                     console.log(tableData);
                  tableau.log("total items processed: "+i);
                  table.appendRows(tableData);
                  doneCallback();
