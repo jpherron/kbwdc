@@ -106,7 +106,7 @@
               //  wb = ["erwer", "ere","ddd"]
 
                 for (var i = 0, len = wb.length; i < len; i++) {
-console.log(wb[i]['First Date Moved To Active']);
+//console.log(wb[i]['First Date Moved To Active']);
       //  for (var key in wb[i]) {console.log(key);}
                   //tableau.log("First Date Moved to Archive: " + wb[i]['First Date Moved to Archive']);
                   //create a timestamp of current date, current hour.
