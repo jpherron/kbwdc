@@ -128,7 +128,6 @@ console.log(tab);
 
         tableau.registerConnector(myConnector);
     })();
- not needed, if not interactive
     $(document).ready(function () {
     $("#submitButton").click(function () {
         tableau.connectionName = "All Kanbanize Data";
